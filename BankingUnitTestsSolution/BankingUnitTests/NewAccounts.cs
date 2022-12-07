@@ -1,4 +1,5 @@
 using BankingDomain;
+using BankingUnitTests.TestDoubles;
 
 namespace BankingUnitTests
 {
@@ -9,7 +10,7 @@ namespace BankingUnitTests
         {
             // Write the Code You Wish You Had (WTCYWYH)
             // Given
-            var account = new BankAccount();
+            var account = new BankAccount(new DummyBonusCalculator());
             // When
             decimal balance = account.GetBalance();
             // Then

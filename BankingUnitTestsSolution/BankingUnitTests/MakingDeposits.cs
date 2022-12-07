@@ -1,4 +1,6 @@
-﻿namespace BankingUnitTests;
+﻿using BankingUnitTests.TestDoubles;
+
+namespace BankingUnitTests;
 
 public class MakingDeposits
 {
@@ -8,7 +10,7 @@ public class MakingDeposits
     public void MakingDepositsIncreasesBalance(decimal amountToDeposit)
     {
         // Given
-        var account = new BankAccount();
+        var account = new BankAccount(new Mock<ICalculateBonuses>().Object);
         var openingBalance = account.GetBalance();
        
         // When
