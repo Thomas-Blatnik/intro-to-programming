@@ -10,7 +10,7 @@ namespace BankingUnitTests
         {
             // Write the Code You Wish You Had (WTCYWYH)
             // Given
-            var account = new BankAccount(new DummyBonusCalculator());
+            var account = new BankAccount(new DummyBonusCalculator(), new Mock<INotifyAccountReps>().Object);
             // When
             decimal balance = account.GetBalance();
             // Then

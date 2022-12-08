@@ -10,7 +10,7 @@ public class MakingDeposits
     public void MakingDepositsIncreasesBalance(decimal amountToDeposit)
     {
         // Given
-        var account = new BankAccount(new Mock<ICalculateBonuses>().Object);
+        var account = new BankAccount(new Mock<ICalculateBonuses>().Object, new Mock<INotifyAccountReps>().Object);
         var openingBalance = account.GetBalance();
        
         // When
