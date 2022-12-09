@@ -1,58 +1,74 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace CSharpSyntax
+namespace CSharpSyntax;
+
+public class ClassMembers
 {
-    public class ClassMembers
+    [Fact]
+    public void CreatingStuff()
     {
-        [Fact]
-        public void CreatingStuff()
+        var book1 = new LibraryBook("9999");
+        book1.Author = "Sue";
+
+        var book2 = new LibraryBook("9999");
+        book2.Author = "Sue";
+
+        //var book2 = book1;
+
+        var myPay = 50M;
+        var yourPay = 50M;
+
+        Assert.Equal(myPay, yourPay);
+
+        Assert.Equal(book1, book2);
+
+        if (book1 == book2)
         {
-            var book = new LibraryBook();
 
-            //var bigTitle = book._author?.ToUpper();
-
-            //Assert.Null(book._isbn);
-            //Assert.Equal(0, book._numberOfPages);
-
-            book.Author = "Sue";
-
-            Assert.Equal("Sue", book.Author);
-            
         }
 
-        [Fact]
-        public void NullableValueTypes()
-        {
-            DateTime? birthday = null;
 
-            if (birthday.HasValue)
-            {
-                birthday.Value.AddDays(3);
-            }
-        }
+
     }
 
-    public class LibraryBook
+    [Fact]
+    public void NullableValueTypes()
     {
-        // "State"
-        // - fields (class-level variables)
-        private string _isbn = string.Empty;
-        private string? _author;  // ? means can be null (sus)
-        private int _numberOfPages;
-        private DateTime _published;
-        // "Behavior"
-        public string? Author
+        DateTime? birthday = null;
+
+        if (birthday.HasValue)
         {
-            get { return _author; }
-            set { _author = value; }
+            birthday.Value.AddDays(3);
         }
-        // - Methods
-        // - Constructors
-        // - Properties
-        // - *Destructors
     }
+}
+
+public class LibraryBook : IEquatable<LibraryBook>
+{
+
+    // "State"
+    // - fields (class-level variables)
+    // Properties should never throw exceptions.
+    // Properties imply no computation.
+    // - If a user class sets a property, it should never change until they
+    //   change it.
+    public string Isbn { get; private set; } = string.Empty;
+    public string Author { get; set; } = string.Empty;
+
+    public LibraryBook(string isbn)
+    {
+        Isbn = isbn;
+
+    }
+
+    public bool Equals(LibraryBook? other)
+    {
+        return (this.Isbn == other?.Isbn && this.Author == other.Author);
+    }
+    // "Behavior"
+    //  - Methods
+
+    //  - Constructors
+    // - Properties
+    //  - *Destructors
 }
